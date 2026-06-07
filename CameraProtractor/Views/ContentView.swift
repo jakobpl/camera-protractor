@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var viewModel = MeasurementViewModel()
+    @State private var protractorPlacement: ProtractorPlacement = .left
 
     var body: some View {
         ZStack {
@@ -12,7 +13,8 @@ struct ContentView: View {
                 currentAngle: viewModel.currentAngle,
                 baselineAngle: viewModel.baselineAngle,
                 relativeAngle: viewModel.relativeAngle,
-                isLevel: viewModel.isLevel
+                isLevel: viewModel.isLevel,
+                placement: protractorPlacement
             )
             .ignoresSafeArea()
 
@@ -94,6 +96,8 @@ struct ContentView: View {
                     .background(.black.opacity(0.62), in: RoundedRectangle(cornerRadius: 8))
             }
 
+            placementPicker
+
             HStack(spacing: 10) {
                 Button(action: viewModel.lockBaseline) {
                     Label("Baseline", systemImage: "pin.fill")
@@ -111,6 +115,18 @@ struct ContentView: View {
                 .buttonStyle(ControlButtonStyle(tint: .white))
             }
         }
+    }
+
+    private var placementPicker: some View {
+        Picker("Protractor position", selection: $protractorPlacement) {
+            ForEach(ProtractorPlacement.allCases) { placement in
+                Label(placement.label, systemImage: placement.iconName)
+                    .tag(placement)
+            }
+        }
+        .pickerStyle(.segmented)
+        .padding(4)
+        .background(.black.opacity(0.58), in: RoundedRectangle(cornerRadius: 8))
     }
 }
 
