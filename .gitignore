@@ -1,0 +1,24 @@
+# Xcode
+DerivedData/
+Build/
+build/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# App archives and symbols
+*.xcarchive
+*.dSYM
+*.dSYM.zip
+
+# macOS
+.DS_Store
+
+# Codex workspace scratch/output folders
+/work/
+/outputs/
